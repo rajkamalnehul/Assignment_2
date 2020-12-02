@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+/** @format */
+
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [counter, setCounter] = useState(0);
+  const [colors] = useState([
+    "red",
+    "yellow",
+    "blue",
+    "green",
+    "purple",
+    "pink",
+  ]);
+  const [randomColor, setRandomColor] = useState(["white"]);
+  const increment = () => {
+    setCounter(counter + 1);
+    const random = colors[Math.floor(Math.random() * colors.length)];
+    setRandomColor(random);
+  };
+
+  const decrement = () => {
+    setCounter(counter - 1);
+    const random = colors[Math.floor(Math.random() * colors.length)];
+    setRandomColor(random);
+  };
+
+  const reset = () => {
+    setCounter(0);
+    setRandomColor("white");
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div style={{ backgroundColor: randomColor }} className="card">
+        <h1>{counter}</h1>
+        <div className="button_container">
+          <button onClick={decrement}>-</button>
+          <button onClick={reset}>Reset</button>
+          <button onClick={increment}>+</button>
+        </div>
+      </div>
     </div>
   );
 }
